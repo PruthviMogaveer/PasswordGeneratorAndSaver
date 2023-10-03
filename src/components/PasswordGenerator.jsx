@@ -14,7 +14,7 @@ function PasswordGenerator() {
 
   const [pass, setPass] = useState("");
 
-  const passGenInputRef = useRef(null)
+  const passGenInputRef = useRef(null);
 
   const passwordGenerator = useCallback(() => {
     let password = "";
@@ -36,9 +36,9 @@ function PasswordGenerator() {
   }, [length, isNumber, isChar]);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(pass)
-    passGenInputRef.current.select()
-  }
+    navigator.clipboard.writeText(pass);
+    passGenInputRef.current.select();
+  };
 
   return (
     <>
@@ -50,7 +50,7 @@ function PasswordGenerator() {
             id="password"
             placeholder="Get your password here"
             readOnly
-            className="outline-none h-7 w-96 max-md:w-52 max-sm:w-28 rounded-l-md p-5 text-gray-800"
+            className="outline-none h-7 w-96 max-md:w-52 max-sm:w-40 rounded-l-md p-5 text-gray-800"
             value={pass}
             ref={passGenInputRef}
           />
@@ -61,7 +61,7 @@ function PasswordGenerator() {
             COPY
           </button>
         </div>
-        <div className="flex justify-between items-center max-md:w-52 max-md:justify-evenly max-md:ml-4  max-sm:w-28 flex-wrap">
+        <div className="flex justify-between items-center max-md:w-52 max-md:justify-evenly max-md:ml-4 max-sm:w-28 max-sm:ml-12 flex-wrap">
           <div className="flex items-center justify-between space-x-2">
             <input
               type="range"
@@ -97,6 +97,9 @@ function PasswordGenerator() {
               Charecter
             </label>
           </div>
+        </div>
+        <div>
+          <button className="bg-green-600 w-full h-8 rounded-md ">SAVE</button>
         </div>
       </div>
     </>
