@@ -2,6 +2,7 @@ import { useCallback, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useId } from "react";
+import usePassword from "../contexts/Password";
 
 function PasswordGenerator() {
   const numberId = useId();
@@ -12,7 +13,8 @@ function PasswordGenerator() {
   const [isNumber, setIsNumber] = useState(false);
   const [isChar, setIsChar] = useState(false);
 
-  const [pass, setPass] = useState("");
+  // const [pass, setPass] = useState("");
+  const { pass, setPass, savePassword } = usePassword();
 
   const passGenInputRef = useRef(null);
 
@@ -55,7 +57,7 @@ function PasswordGenerator() {
             ref={passGenInputRef}
           />
           <button
-            className="bg-blue-800 rounded-r-md w-1/4 text-white hover:bg-blue-700 active:scale-95 max-md:p-2"
+            className="bg-blue-800 rounded-r-md w-1/4 text-white hover:bg-blue-700 active:scale-95 max-md:p-2 transition-all duration-150"
             onClick={copyToClipboard}
           >
             COPY
@@ -68,7 +70,7 @@ function PasswordGenerator() {
               name="length"
               id={lengthId}
               value={length}
-              className=""
+              className="cursor-pointer"
               onChange={(e) => setLength(e.target.value)}
             />
             <label htmlFor={lengthId} className="text-slate-200">
@@ -80,9 +82,10 @@ function PasswordGenerator() {
               type="checkbox"
               name="number"
               id={numberId}
+              className="cursor-pointer"
               onChange={() => setIsNumber((prev) => !prev)}
             />
-            <label htmlFor={numberId} className="text-slate-200">
+            <label htmlFor={numberId} className="text-slate-200 cursor-pointer">
               Number
             </label>
           </div>
@@ -91,15 +94,21 @@ function PasswordGenerator() {
               type="checkbox"
               name="character"
               id={charId}
+              className="cursor-pointer"
               onChange={() => setIsChar((prev) => !prev)}
             />
-            <label htmlFor={charId} className="text-slate-200">
+            <label htmlFor={charId} className="text-slate-200 cursor-pointer">
               Charecter
             </label>
           </div>
         </div>
         <div>
-          <button className="bg-green-600 w-full h-8 rounded-md ">SAVE</button>
+          <button
+            className="bg-green-700 w-full h-8 rounded-md hover:bg-green-600 active:scale-95 transition-all duration-150"
+            onClick={savePassword}
+          >
+            SAVE
+          </button>
         </div>
       </div>
     </>
