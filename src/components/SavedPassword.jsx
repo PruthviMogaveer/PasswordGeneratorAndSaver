@@ -4,12 +4,13 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import usePassword from "../contexts/Password";
 
 const SavedPassword = ({ password }) => {
-  const savedPassId = useId();
+  const savedPassId = useId(); //Unique id for each saved password box
 
-  const passRef = useRef(null);
+  const passRef = useRef(null); //useRef for the saved password input box
 
-  const { delPass } = usePassword();
+  const { delPass } = usePassword(); //using the usePassword context
 
+  // To copy the saved password
   const copyPass = () => {
     navigator.clipboard.writeText(password);
     passRef.current.select();
@@ -17,29 +18,31 @@ const SavedPassword = ({ password }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center ">
-        <div className="relative">
+      <div className="flex justify-center items-center relative w-[26.5rem] h-10 bg-white rounded-md">
+        <div className="absolute left-0 p-2">
           <input
             type="text"
             name="savedPassword"
             id={savedPassId}
             readOnly
             ref={passRef}
-            className="outline-none h-7 w-[26.5rem] max-md:w-52 max-sm:w-40 rounded-md p-5 text-gray-800 "
+            className="outline-none  max-md:w-52 max-sm:w-40 p-5 text-gray-800 bg-transparent w-[21rem]"
             value={password}
           />
         </div>
-        <div
-          className="absolute right-24 cursor-pointer text-gray-900 active:scale-75 transition-all duration-150"
-          onClick={copyPass}
-        >
-          <FileCopyIcon />
-        </div>
-        <div
-          className="absolute right-14 cursor-pointer text-gray-900 active:scale-75 transition-all duration-150"
-          onClick={() => delPass(password)}
-        >
-          <DeleteIcon />
+        <div className="flex absolute right-4 space-x-4 justify-around items-center">
+          <button
+            className=" cursor-pointer text-gray-900 active:scale-75 transition-all duration-150"
+            onClick={copyPass}
+          >
+            <FileCopyIcon />
+          </button>
+          <button
+            className=" cursor-pointer text-gray-900 active:scale-75 transition-all duration-150"
+            onClick={() => delPass(password)}
+          >
+            <DeleteIcon />
+          </button>
         </div>
       </div>
     </>

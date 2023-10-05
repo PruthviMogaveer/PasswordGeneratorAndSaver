@@ -1,8 +1,9 @@
 import { PasswordGenerator, SavedPasswordList } from "./components";
-import { PasswordContextProvider } from "./contexts/Password";
+import usePassword, { PasswordContextProvider } from "./contexts/Password";
 
 function App() {
   return (
+    // Binding with the PasswordContextProvider context
     <PasswordContextProvider>
       <main className="bg-slate-900 min-h-screen w-full flex flex-col flex-wrap items-center justify-center relative">
         <section className="mb-5 absolute top-16">

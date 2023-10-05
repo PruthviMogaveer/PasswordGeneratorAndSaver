@@ -9,15 +9,21 @@ function PasswordGenerator() {
   const lengthId = useId();
   const charId = useId();
 
-  const [length, setLength] = useState(8);
-  const [isNumber, setIsNumber] = useState(false);
-  const [isChar, setIsChar] = useState(false);
+  const [length, setLength] = useState(8); //Length of the password
+  const [isNumber, setIsNumber] = useState(false); //Number is unabled or not
+  const [isChar, setIsChar] = useState(false); //Character is unabled or not
 
-  // const [pass, setPass] = useState("");
-  const { pass, setPass, savePassword } = usePassword();
+  // Using the usePassword context
+  const { pass, setPass, savePassword, savedPasswords } = usePassword();
 
-  const passGenInputRef = useRef(null);
+  useEffect(
+    () => localStorage.setItem("passwords", JSON.stringify(savedPasswords)),
+    [savedPasswords]
+  ); //Storing the saved passwords in local storage
 
+  const passGenInputRef = useRef(null); //useref for the input box
+
+  //To generate the passsword using useCallback hook
   const passwordGenerator = useCallback(() => {
     let password = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -35,8 +41,9 @@ function PasswordGenerator() {
 
   useEffect(() => {
     setPass(passwordGenerator);
-  }, [length, isNumber, isChar]);
+  }, [length, isNumber, isChar]); //Updating the password each time it is generated
 
+  // Password copy function for copy btn
   const copyToClipboard = () => {
     navigator.clipboard.writeText(pass);
     passGenInputRef.current.select();
