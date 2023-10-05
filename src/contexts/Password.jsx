@@ -21,10 +21,10 @@ export const PasswordContextProvider = ({ children }) => {
     initialSavedPasswords || []
   ); //Storage for saved passwords
 
-  const flag = false;
+  let flag = false;
   // Saving the password in the useState variable
   const savePassword = () => {
-        savedPasswords.map((p) => {
+    savedPasswords.map((p) => {
       p == pass && (flag = true);
     });
     flag != true && setSavedPasswords([...savedPasswords, pass]);
