@@ -26,9 +26,15 @@ const SavedPassword = ({ password }) => {
             id={savedPassId}
             readOnly
             ref={passRef}
-            className="outline-none  max-md:w-52 max-sm:w-40 p-5 text-gray-800 bg-transparent w-[21rem]"
-            value={password}
+            className="outline-none  max-md:w-52 max-sm:w-40 p-5 text-gray-800 bg-transparent w-[21rem] relative z-10"
+            value={password.pass}
           />
+          <label
+            htmlFor="savedPasswordId"
+            className="absolute top-[0.71rem] px-4 z-0 bg-white rounded-md text-slate-600 text-sm left-5"
+          >
+            {password.key}
+          </label>
         </div>
         <div className="flex absolute right-4 space-x-4 justify-around items-center">
           <button
@@ -39,7 +45,7 @@ const SavedPassword = ({ password }) => {
           </button>
           <button
             className=" cursor-pointer text-gray-900 active:scale-75 transition-all duration-150"
-            onClick={() => delPass(password)}
+            onClick={() => delPass(password.key)}
           >
             <DeleteIcon />
           </button>

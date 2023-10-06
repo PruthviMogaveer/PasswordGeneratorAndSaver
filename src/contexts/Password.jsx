@@ -16,6 +16,7 @@ export const PasswordContextProvider = ({ children }) => {
   const initialSavedPasswords = getLocalData();
 
   const [pass, setPass] = useState(""); //Storage for generated password
+  const [key, setKey] = useState(""); //Storing the key for password
 
   const [savedPasswords, setSavedPasswords] = useState(
     initialSavedPasswords || []
@@ -25,22 +26,32 @@ export const PasswordContextProvider = ({ children }) => {
   // Saving the password in the useState variable
   const savePassword = () => {
     savedPasswords.map((p) => {
-      p == pass && (flag = true);
+      p.key == key && (flag = true);
     });
-    flag != true && setSavedPasswords([...savedPasswords, pass]);
+    flag != true &&
+      setSavedPasswords([...savedPasswords, { key: key, pass: pass }]);
   };
 
   // To delete the password from useState variable
   const delPass = (password) => {
     setSavedPasswords(() =>
-      savedPasswords.filter((savedPassword) => password !== savedPassword)
+      savedPasswords.filter((savedPassword) => password !== savedPassword.key)
     );
   };
 
   // returing the context provider
   return (
     <PasswordContext.Provider
-      value={{ pass, setPass, savedPasswords, savePassword, delPass, flag }}
+      value={{
+        pass,
+        setPass,
+        savedPasswords,
+        savePassword,
+        delPass,
+        flag,
+        key,
+        setKey,
+      }}
     >
       {children}
     </PasswordContext.Provider>

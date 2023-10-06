@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useId } from "react";
 import usePassword from "../contexts/Password";
+import { red } from "@mui/material/colors";
 
 function PasswordGenerator() {
   const numberId = useId();
@@ -14,14 +15,16 @@ function PasswordGenerator() {
   const [isChar, setIsChar] = useState(false); //Character is unabled or not
 
   // Using the usePassword context
-  const { pass, setPass, savePassword, savedPasswords } = usePassword();
+  const { pass, setPass, savePassword, savedPasswords, key, setKey } =
+    usePassword();
 
   useEffect(
     () => localStorage.setItem("passwords", JSON.stringify(savedPasswords)),
     [savedPasswords]
   ); //Storing the saved passwords in local storage
 
-  const passGenInputRef = useRef(null); //useref for the input box
+  const passGenInputRef = useRef(null); //useref for the password input box
+  const passKeyRef = useRef(null); //useref for the key input box
 
   //To generate the passsword using useCallback hook
   const passwordGenerator = useCallback(() => {
@@ -47,6 +50,27 @@ function PasswordGenerator() {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(pass);
     passGenInputRef.current.select();
+  };
+
+  //To handle the save btn click
+  const handleSave = () => {
+    if (key !== "") {
+      savePassword();
+      setKey("");
+      passKeyRef.current.classList.remove(
+        "placeholder-red-600",
+        "border",
+        "border-red-600"
+      );
+      passKeyRef.current.classList.add("placeholder-slate-600");
+    } else {
+      passKeyRef.current.classList.remove("placeholder-slate-600");
+      passKeyRef.current.classList.add(
+        "placeholder-red-600",
+        "border",
+        "border-red-600"
+      );
+    }
   };
 
   return (
@@ -110,9 +134,26 @@ function PasswordGenerator() {
           </div>
         </div>
         <div>
+          <input
+            type="text"
+            name="Key"
+            id="Key"
+            placeholder="Enter the key for password"
+            className="outline-none h-0 w-full mb-3 max-md:w-52 max-sm:w-40 rounded-md p-5 text-gray-800 placeholder-slate-600"
+            value={key}
+            onChange={(e) => {
+              setKey(e.target.value);
+              passKeyRef.current.classList.remove(
+                "placeholder-red-600",
+                "border",
+                "border-red-600"
+              );
+            }}
+            ref={passKeyRef}
+          />
           <button
-            className="bg-green-700 w-full h-8 rounded-md hover:bg-green-600 active:scale-95 transition-all duration-150"
-            onClick={savePassword}
+            className="bg-green-700 w-full h-9 rounded-md hover:bg-green-600 active:scale-95 transition-all duration-150"
+            onClick={handleSave}
           >
             SAVE
           </button>
