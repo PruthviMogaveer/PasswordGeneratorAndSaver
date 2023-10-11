@@ -12,7 +12,7 @@ const SavedPassword = ({ password }) => {
 
   // To copy the saved password
   const copyPass = () => {
-    navigator.clipboard.writeText(password);
+    navigator.clipboard.writeText(password.pass);
     passRef.current.select();
   };
 
