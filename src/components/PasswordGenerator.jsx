@@ -133,31 +133,30 @@ function PasswordGenerator() {
             </label>
           </div>
         </div>
-        <div>
-          <input
-            type="text"
-            name="Key"
-            id="Key"
-            placeholder="Enter the key for password"
-            className="outline-none h-0 w-full mb-3 max-md:w-52 max-sm:w-40 rounded-md p-5 text-gray-800 placeholder-slate-600"
-            value={key}
-            onChange={(e) => {
-              setKey(e.target.value);
-              passKeyRef.current.classList.remove(
-                "placeholder-red-600",
-                "border",
-                "border-red-600"
-              );
-            }}
-            ref={passKeyRef}
-          />
-          <button
-            className="bg-green-700 w-full h-9 rounded-md hover:bg-green-600 active:scale-95 transition-all duration-150"
-            onClick={handleSave}
-          >
-            SAVE
-          </button>
-        </div>
+
+        <input
+          type="text"
+          name="Key"
+          id="Key"
+          placeholder="Enter the key for password"
+          className="outline-none h-0 w-full mb-3 max-md:w-72 max-sm:w-56 rounded-md p-5 text-gray-800 placeholder-slate-600"
+          value={key}
+          onChange={(e) => {
+            setKey(e.target.value);
+            passKeyRef.current.classList.remove(
+              "placeholder-red-600",
+              "border",
+              "border-red-600"
+            );
+          }}
+          ref={passKeyRef}
+        />
+        <button
+          className="bg-green-700 w-full h-9 rounded-md hover:bg-green-600 active:scale-95 transition-all duration-150 max-md:w-72 max-sm:w-56"
+          onClick={handleSave}
+        >
+          SAVE
+        </button>
       </div>
     </>
   );

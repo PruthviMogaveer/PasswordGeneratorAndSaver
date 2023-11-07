@@ -9,7 +9,7 @@ function App() {
         <section className="mb-10 absolute top-10">
           <PasswordGenerator />
         </section>
-        <section className="mt-10 absolute top-72 max-md:top-80 max-sm:top-[22rem] max-h-[18rem] no-scrollbar overflow-y-auto rounded-lg ">
+        <section className="mt-10 absolute top-72 max-md:w-[23rem] max-sm:w-[19rem] max-md:top-80 max-sm:top-[22rem] max-h-[18rem] no-scrollbar overflow-y-auto rounded-lg ">
           <SavedPasswordList />
         </section>
       </main>

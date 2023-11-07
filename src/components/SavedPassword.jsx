@@ -18,7 +18,7 @@ const SavedPassword = ({ password }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center relative w-[26.5rem] h-10 bg-white rounded-md">
+      <div className="flex max-sm:w-64 max-sm:left-[-1rem] max-md:w-80 max-md:left-[-1rem] justify-center items-center relative w-[26.5rem] h-10 bg-white rounded-md">
         <div className="absolute left-0 p-2">
           <input
             type="text"
